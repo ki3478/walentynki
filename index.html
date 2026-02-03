@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Walentynki</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#ffe6ee;
+    font-family:Arial, sans-serif;
+}
+
+.container{
+    text-align:center;
+}
+
+video{
+    width:320px;
+    border-radius:12px;
+}
+
+.buttons{
+    margin-top:15px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+button{
+    padding:10px 22px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* przycisk cofania */
+.backBtn{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    padding:8px 14px;
+    font-size:14px;
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="container">
+
+    <!-- PIERWSZA STRONA -->
+    <div id="page1">
+
+        <video autoplay muted playsinline loop>
+            <source src="film.mp4" type="video/mp4">
+        </video>
+
+        <h2>Zostaniesz moją walentynką? ❤️</h2>
+
+        <div class="buttons">
+            <button id="tak">TAK</button>
+            <button id="nie">NIE</button>
+        </div>
+
+    </div>
+
+    <!-- DRUGA STRONA -->
+    <div id="page2" style="display:none;">
+
+        <video autoplay playsinline loop>
+            <source src="film2.mp4" type="video/mp4">
+        </video>
+
+        <h2>ezzz</h2>
+
+        <button class="backBtn" id="back">Cofnij</button>
+    </div>
+
+</div>
+
+<script>
+const page1 = document.getElementById("page1");
+const page2 = document.getElementById("page2");
+
+const nieBtn = document.getElementById("nie");
+const takBtn = document.getElementById("tak");
+const backBtn = document.getElementById("back");
+
+/* uciekający NIE */
+nieBtn.addEventListener("click", () => {
+
+    nieBtn.style.position = "fixed";
+
+    const maxX = window.innerWidth - nieBtn.offsetWidth;
+    const maxY = window.innerHeight - nieBtn.offsetHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    nieBtn.style.left = x + "px";
+    nieBtn.style.top  = y + "px";
+});
+
+/* przejście na drugą stronę */
+takBtn.addEventListener("click", () => {
+    page1.style.display = "none";
+    page2.style.display = "block";
+});
+
+/* powrót na pierwszą stronę */
+backBtn.addEventListener("click", () => {
+    page2.style.display = "none";
+    page1.style.display = "block";
+});
+</script>
+
+</body>
+</html>
